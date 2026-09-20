@@ -130,8 +130,23 @@ public class EEGModel {
 	 * @throws IOException Thrown if the file can't be written.
 	 */
 	public void saveFile(String fileName) throws IOException {
-		// TODO
+		File f = new File(fileName);
+		FileOutputStream fos = new FileOutputStream(f);
+		PrintStream ps = new PrintStream(fos);
 		
+		int indice = 0;
+		for(Measurement m: getMeasurements()) {  //Tengo que cambiar getMeasurementes por método o colección donde guarde los objetos Measurement dentro de EEGModel
+			System.out.print(indice); //Indice o primera columna
+			
+			float[] channels = m.getChannels(); //Tengo que cambiar por le método de Measurements que devuelva el array de floats
+			for(float channel: channels) {
+				System.out.print("," + channel);
+			}
+			System.out.println(); //Nueva línea
+			indice++;
+		}
+		fos.close();
+		ps.close();
 	}
 
 	/**
